@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-          
+              "src/boostrap.css",
               "src/styles.css"
             ],
             "scripts": []
