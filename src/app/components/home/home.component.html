@@ -1,6 +1,7 @@
 <div class="container mt-5 ">
     <div class="row">
         <div class="col-md-12">
+          <b style="float: right ;">Satın Almak için Giriş Yapınız.</b>
           <div class="row alert alert-danger" *ngIf="onaylama">
             
               <p> <b>{{secUrun.urunAdi}}</b> adlı ürün sipariş verilecektir. Onaylıyor musunuz?</p>
@@ -11,14 +12,10 @@
     </div>
   
 
-
-<b style="float: right ;">Satın Almak için Giriş Yapınız.</b>
-
 <div class="row">
     <div class="col-md-12 mt-2">
-      <div class="col-md-4 mt-5">
-        <h4>--Ürünler--</h4>
-      </div>
+      
+      <h4>--Ürünler--</h4>
       <table class="table table-hover mt-4">
         <thead>
           <th>Ürün Adı</th>
@@ -42,4 +39,4 @@
           </tr>
         </tbody>
       </table>
-    
+  </div>  

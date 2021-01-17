@@ -58,30 +58,8 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  KategoriKaydet(){
-    var tarih = new Date();
-    if (this.secKat.key == null) {
-      this.secKat.islem = false;
-      this.fbServis.KategoriEkle(this.secKat).then(d => {
-        this.sonuc.islem = true;
-        this.sonuc.mesaj = "Kategori Eklendi.";
-      });
-    } else {
-      this.secKat.islem = false;
-      this.fbServis.KategoriEkle(this.secKat).then(d => {
-        this.sonuc.islem = true;
-        this.sonuc.mesaj = " KategoriGüncellendi.";
-      });
-    }
-  }
 
-  KategoriSil(){
-    this.fbServis.KategoriSil(this.secKat.key).then(d => {
-      this.sonuc.islem = true;
-      this.sonuc.mesaj = "Kategori Silindi"
-      this.silme = false;
-    });
-  }
+
 
   KategoriSec(k: Kategori){
     Object.assign(this.secKat, k)
