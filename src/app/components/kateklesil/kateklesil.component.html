@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="row alert alert-danger" *ngIf="silme">
+    <div class="col-md-12">
+      <p> <b>{{secKat.katAdi}}</b> adlı kategori silinecektir. Onaylıyor musunuz?</p>
+      <button class="btn btn-outline-danger btn-sm" (click)="KategoriSill()">Evet Sil</button>
+      <button class="btn btn-outline-primary btn-sm ml-2" (click)="silme=false;">Hayır Kapat</button>
+    </div>
+  </div>
+  <div class="col-md-12">
+
+    <button class="btn btn-primary" style="float:right" [routerLink]="['/admin']">Ürünleri Listele</button>
+  </div>
+
+<div class="row">
+  <div class="col-md-12">
+    <hr>
+    <h4>Kategori Ekle</h4>
+    <hr>
+    <div class="col-md-12">
+      <form #frm="ngForm" (submit)="KategoriKaydet()">
+        <div class="form-group">
+          <label>Kategori Adı</label>
+          <input type="text" class="form-control" name="katAdi" [(ngModel)]="secKat.katAdi" required>
+          
+        </div>
+        <div class="form-group">
+          <input type="submit" value="KategoriKaydet" class="btn btn-outline-success" [disabled]="frm.invalid">
+
+        </div>
+    <h4>Kategoriler</h4>
+    <table class="table table-hover">
+      <thead>
+        <th>Id</th>
+        <th>Kategori Adı</th>
+        <th>Sil</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let kategori of kategoriler">
+          <td>{{kategori.key}}</td>
+          <td>{{kategori.katAdi}}</td>
+          <td><button class="btn btn-danger btn-sm" (click)="KategoriSec(kategori);silme=true">Sil</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+      </form>
+     
+

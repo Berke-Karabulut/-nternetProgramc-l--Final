@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
 
-      <button class="btn btn-outline-primary" [routerLink]="['/admin']">Ürünleri Listele</button>
+      <button class="btn btn-primary" style="float:right" [routerLink]="['/admin']">Ürünleri Listele</button>
     </div>
   </div>
   <div class="row">
@@ -26,6 +26,10 @@
               <label>Kategori Adı</label>
 
               <input type="text" name="katAdı" class="form-control" [(ngModel)]="secUrun.urunKatAdi" required>
+            </div>
+            <div class="form-group">
+              <label>Ürün Açıklaması</label>
+              <textarea class="form-control" name="urunAçıklaması" [(ngModel)]="secUrun.urunaciklama" required></textarea>
             </div>
           </div>
           <div class="card-footer">

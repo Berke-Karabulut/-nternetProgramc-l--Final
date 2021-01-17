@@ -1,8 +1,45 @@
 <div class="container mt-5 ">
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-outline-danger" style="float:right" (click)="OturumKapat()" *ngIf="fbservis.OturumKontrol()">Oturumu Kapat</button>
+          <div class="row alert alert-danger" *ngIf="onaylama">
             
+              <p> <b>{{secUrun.urunAdi}}</b> adlı ürün sipariş verilecektir. Onaylıyor musunuz?</p>
+              <button class="btn btn-success btn-sm" (click)="ToastUygula()">Sipariş Ver</button>
+              <button class="btn btn-outline-danger btn-sm ml-2" (click)="onaylama=false;">Hayır Kapat</button>
+          </div>
         </div>
     </div>
-</div>
+  
+
+
+<b style="float: right ;">Satın Almak için Giriş Yapınız.</b>
+
+<div class="row">
+    <div class="col-md-12 mt-2">
+      <div class="col-md-4 mt-5">
+        <h4>--Ürünler--</h4>
+      </div>
+      <table class="table table-hover mt-4">
+        <thead>
+          <th>Ürün Adı</th>
+          <th>Fiyatı</th>
+          <th>Kategori Adı</th>
+          <th>Ürün Bilgisi</th>
+          <th>Satın Al</th>
+          
+        </thead>
+        <tbody>
+          
+          <tr *ngFor="let urun of urunler">
+            <td>{{urun.urunAdi}}</td>
+            <td>{{urun.urunfiyati |currency:'₺'}}</td>
+            <td>{{urun.urunKatAdi}}</td>
+            <td>{{urun.urunaciklama}}</td>
+            
+            <td><button class="btn btn-warning btn-sm" (click)="UrunSec(urun);onaylama=true;" *ngIf="fbservis.OturumKontrol()">Satın Al</button>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
+    

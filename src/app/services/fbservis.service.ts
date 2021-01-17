@@ -1,26 +1,33 @@
+import { Urun } from './../models/urun';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Kategori } from './../models/kategori';
 
 import { Uye } from './../models/uye';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth'
-import { Urun } from '../models/urun';
+import { Key } from 'protractor';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FbservisService {
 
-  private dbKayit = '/Kayitlar';
   private dbUye = '/Uyeler';
   private dbUrun = '/Urunler';
-
+  private dbKategori = '/Kategoriler';
+  basePath = "/Urunler";
+   
   uyeRef: AngularFireList<Uye> = null;
   urunRef: AngularFireList<Urun> = null;
+  KategoriRef: AngularFireList<Kategori> = null;
   
   constructor(
   
   public db: AngularFireDatabase,
-  public afAuth: AngularFireAuth
+  public afAuth: AngularFireAuth,
+  public storage: AngularFireStorage
   
   )
   
@@ -28,6 +35,7 @@ export class FbservisService {
   
   this.uyeRef = db.list(this.dbUye);
   this.urunRef = db.list(this.dbUrun);
+  this.KategoriRef = db.list(this.dbKategori)
 
   }
   OturumKontrol(){
@@ -54,12 +62,44 @@ export class FbservisService {
   UyeEkle(uye: Uye) {
     return this.uyeRef.push(uye);
   }
+  /* Storage Servisleri Başlangıç */
+
+  UrunYukleStorage(urun: Urun) {
+    var tarih = new Date();
+    const urunYol = this.basePath + "/" + urun.file.name;
+    const storageRef = this.storage.ref(urunYol);
+    const yukleTask = this.storage.upload(urunYol, urun.file);
+    yukleTask.snapshotChanges().pipe(
+      finalize(() => {
+        storageRef.getDownloadURL().subscribe(downloadURL => {
+          urun.urunphotoUrl = downloadURL;    
+          urun.kayTarih = tarih.getTime().toString();
+          urun.urunAdi = urun.file.name;
+       
+          this.UrunVerileriKaydet(urun);
+        });
+      })
+    ).subscribe();
+    return yukleTask.percentageChanges();
+  }
+
+  UrunVerileriKaydet(urun: Urun){
+    this.db.list(this.basePath).push(urun);
+  }
+  urunFotoListele(){
+    return this.db.list(this.basePath);
+  }
+
+  /* Ürün Servisleri Başlangıç */
   
 UrunListele(){
   return this.urunRef;
 }
 UrunByKey(key:string){
   return this.db.object("/Urunler/" + key)
+}
+UrunListeleByUID(uid: string) {
+  return this.db.list("/Urunler", q => q.orderByChild("uid").equalTo(uid));
 }
 UrunEkle(urun: Urun) {
   return this.urunRef.push(urun);
@@ -69,6 +109,27 @@ UrunDuzenle(urun: Urun) {
 }
 urunSil(key: string) {
   return this.urunRef.remove(key);
+}
+
+/* Firabase Kategori Başlangıç */
+
+KategoriListele(){
+  return this.KategoriRef;
+}
+
+KategoriByKey(key:string){
+  return this.db.object("/Kategoriler/" + key)
+}
+
+KategoriEkle(kat : Kategori){
+return this.KategoriRef.push(kat)
+}
+KategoriDuzenle(kategori: Kategori) {
+  return this.KategoriRef.update(kategori.key, kategori);
+}
+
+KategoriSil(key: string){
+  return this.KategoriRef.remove(key);
 }
 
 }

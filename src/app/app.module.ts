@@ -1,3 +1,6 @@
+
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { KateklesilComponent } from './components/kateklesil/kateklesil.component';
 import { UrunduzenlemeComponent } from './components/urunduzenleme/urunduzenleme.component';
 
 import { AdminComponent } from './components/admin/admin.component';
@@ -11,9 +14,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { AngularFireModule } from '@angular/fire';
-
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -22,14 +27,20 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     AdminComponent,
-    UrunduzenlemeComponent
+    UrunduzenlemeComponent,
+    KateklesilComponent,
+    NavbarComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    AngularFireStorageModule
     
   ],
   providers: [],

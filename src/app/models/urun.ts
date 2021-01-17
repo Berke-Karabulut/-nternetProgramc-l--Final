@@ -1,10 +1,12 @@
 export class Urun {
     key: string;
+    urunphotoUrl: string;
+    file: File
     urunAdi: string;
     urunfiyati: number
-    urunkatId: number
+    urunkatkey: number
     urunKatAdi: string;
-    urunacıklama: string;
+    urunaciklama: string;
     islem: boolean
     uid: string;
     kayTarih: string;
