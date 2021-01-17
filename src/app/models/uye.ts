@@ -4,5 +4,4 @@ export class Uye {
     mail: string;
     parola: string;
     uid: string;
-    role:string
 }
