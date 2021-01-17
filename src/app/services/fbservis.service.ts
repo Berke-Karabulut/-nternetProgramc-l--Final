@@ -1,8 +1,9 @@
+
 import { Uye } from './../models/uye';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
-import { Kayit } from '../models/kayıt';
 import {AngularFireAuth} from '@angular/fire/auth'
+import { Urun } from '../models/urun';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,10 @@ export class FbservisService {
 
   private dbKayit = '/Kayitlar';
   private dbUye = '/Uyeler';
+  private dbUrun = '/Urunler';
 
-  kayitRef: AngularFireList<Kayit> = null;
   uyeRef: AngularFireList<Uye> = null;
+  urunRef: AngularFireList<Urun> = null;
   
   constructor(
   
@@ -24,8 +26,8 @@ export class FbservisService {
   
   {
   
-  this.kayitRef = db.list(this.dbKayit);
   this.uyeRef = db.list(this.dbUye);
+  this.urunRef = db.list(this.dbUrun);
 
   }
   OturumKontrol(){
@@ -52,22 +54,21 @@ export class FbservisService {
   UyeEkle(uye: Uye) {
     return this.uyeRef.push(uye);
   }
-  KayitListele() {
-    return this.kayitRef;
-  }
-  KayitListeleByUID(uid: string) {
-    return this.db.list("/Kayitlar", q => q.orderByChild("uid").equalTo(uid));
-  }
-  KayitByKey(key: string) {
-    return this.db.object("/Kayitlar/" + key);
-  }
-  KayitEkle(kayit: Kayit) {
-    return this.kayitRef.push(kayit);
-  }
-  KayitDuzenle(kayit: Kayit) {
-    return this.kayitRef.update(kayit.key, kayit);
-  }
-  KayitSil(key: string) {
-    return this.kayitRef.remove(key);
-  }
+  
+UrunListele(){
+  return this.urunRef;
+}
+UrunByKey(key:string){
+  return this.db.object("/Urunler/" + key)
+}
+UrunEkle(urun: Urun) {
+  return this.urunRef.push(urun);
+}
+UrunDuzenle(urun: Urun) {
+  return this.urunRef.update(urun.key, urun);
+}
+urunSil(key: string) {
+  return this.urunRef.remove(key);
+}
+
 }

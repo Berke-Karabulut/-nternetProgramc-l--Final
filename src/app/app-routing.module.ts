@@ -1,3 +1,6 @@
+import { UrunduzenlemeComponent } from './components/urunduzenleme/urunduzenleme.component';
+
+import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -9,6 +12,9 @@ const routes: Routes = [
   
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  {path: 'admin', component: AdminComponent},
+  {path: 'urunduzenleme/:key', component: UrunduzenlemeComponent},
+ 
 ];
 
 @NgModule({

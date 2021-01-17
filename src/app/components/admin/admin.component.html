@@ -1,0 +1,59 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      <h4>Ürünler</h4>
+      <table class="table table-hover">
+        <thead>
+          <th>Id</th>
+          <th>Urun Adı</th>
+          <th>Fiyatı</th>
+          <th>Kategori Adı</th>
+          <th>Düzenle</th>
+          <th>Sil</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let urun of urunler">
+            <td>{{urun.key}}</td>
+            <td>{{urun.urunAdi}}</td>
+            <td>{{urun.urunfiyati |currency:'₺'}}</td>
+            <td>{{urun.urunKatAdi}}</td>
+            
+            <td><button class="btn btn-warning btn-sm" [routerLink]="['/urunduzenleme',urun.key]">Düzenle</button>
+            </td>
+            <td><button class="btn btn-danger btn-sm" [routerLink]="['/urunduzenlesil',urun.key,2]">Sil</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Ürün Ekle</h4>
+      <hr>
+      <div class="col-md-4">
+        <h4>Ürün Ekle Düzenle</h4>
+        <hr>
+        <form #frm="ngForm" (submit)="Kaydet()">
+          <div class="form-group">
+            <label>Ürün Adı</label>
+            <input type="text" class="form-control" name="urunAdı" [(ngModel)]="secUrun.urunAdi" required>
+            <input type="hidden" class="form-control" name="key" [(ngModel)]="secUrun.key">
+          </div>
+          <div class="form-group">
+            <label>Ürün Fiyatı</label>
+            <input type="text" class="form-control" name="urunFiyat" [(ngModel)]="secUrun.urunfiyati" required>
+          </div>
+          <div class="form-group">
+            <label>Ürün Kategorisi</label>
+            <input type="text" class="form-control" name="tel" [(ngModel)]="secUrun.urunKatAdi" required>
+          </div>
+          <div class="form-group">
+            <label>Açıklama</label>
+            <textarea class="form-control" name="urunAçıklaması" [(ngModel)]="secUrun.urunAdi" required></textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Kaydet" class="btn btn-outline-success" [disabled]="frm.invalid">
+  
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+  

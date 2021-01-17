@@ -1,3 +1,6 @@
+import { UrunduzenlemeComponent } from './components/urunduzenleme/urunduzenleme.component';
+
+import { AdminComponent } from './components/admin/admin.component';
 import { RegisterComponent } from './components/register/register.component';
 import { environment } from './../environments/environment';
 import { LoginComponent } from './components/login/login.component';
@@ -17,7 +20,9 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    UrunduzenlemeComponent
   ],
   imports: [
     BrowserModule,
