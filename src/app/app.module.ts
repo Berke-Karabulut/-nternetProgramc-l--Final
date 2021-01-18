@@ -1,4 +1,5 @@
 
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { KateklesilComponent } from './components/kateklesil/kateklesil.component';
 import { UrunduzenlemeComponent } from './components/urunduzenleme/urunduzenleme.component';
@@ -30,6 +31,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     UrunduzenlemeComponent,
     KateklesilComponent,
     NavbarComponent,
+   
     
   ],
   imports: [

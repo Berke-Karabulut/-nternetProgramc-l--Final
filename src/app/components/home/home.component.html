@@ -18,20 +18,23 @@
       <h4>--Ürünler--</h4>
       <table class="table table-hover mt-4">
         <thead>
+          <th>Ürün Görseli</th>
           <th>Ürün Adı</th>
           <th>Fiyatı</th>
           <th>Kategori Adı</th>
           <th>Ürün Bilgisi</th>
           <th>Satın Al</th>
-          
+        
         </thead>
         <tbody>
           
           <tr *ngFor="let urun of urunler">
+            <td><img src="{{urun.url}}" alt="" style="height:100px;width:100px;"></td>
             <td>{{urun.urunAdi}}</td>
             <td>{{urun.urunfiyati |currency:'₺'}}</td>
             <td>{{urun.urunKatAdi}}</td>
             <td>{{urun.urunaciklama}}</td>
+            
             
             <td><button class="btn btn-warning btn-sm" (click)="UrunSec(urun);onaylama=true;" *ngIf="fbservis.OturumKontrol()">Satın Al</button>
             </td>

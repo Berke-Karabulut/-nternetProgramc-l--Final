@@ -1,9 +1,12 @@
+
+
 import { FbservisService } from './../../services/fbservis.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from'rxjs/operators';
 import { Urun } from './../../models/urun';
-import { Sonuc } from './../../models/sonuc';
+import { Sonuc } from './../../models/sonuc'
+
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -19,9 +22,12 @@ export class HomeComponent implements OnInit {
   silme: boolean = false;
   onaylama: boolean = false;
   uid:string;
-  adsoyad:string;
+
+
+  
 
   constructor(
+   
     public fbservis: FbservisService,
     public router : Router,
     public toast: ToastrService
@@ -30,6 +36,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.UrunListele();
+    var user: any = JSON.parse(localStorage.getItem("user"));
+    this.uid = user.uid;
   }
 
   ToastUygula(){
@@ -55,17 +63,7 @@ export class HomeComponent implements OnInit {
     Object.assign(this.secUrun, u)
   }
 
-  SepeteEkle() {
-    var user = JSON.parse(localStorage.getItem("user"));
-    this.secUrun.uid = user.uid;
   
-    var tarih = new Date();
-    this.secUrun.kayTarih = tarih.getTime().toString();
-    this.secUrun.duzTarih = tarih.getTime().toString();
-    this.fbservis.UrunEkle(this.secUrun).then(d => {
-      this.router.navigate(['/']);
-    });
-  }
 
   OturumKapat(){
 this.fbservis.OturumKapat().then(d=>{

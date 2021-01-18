@@ -12,7 +12,8 @@ export class UrunduzenlemeComponent implements OnInit {
   key: string;
   secUrun: Urun = new Urun();
   uid: string;
-
+  admin: string;
+  adminsonuc: boolean;
   constructor(
     public route: ActivatedRoute,
     public fbServis: FbservisService,
@@ -24,7 +25,16 @@ export class UrunduzenlemeComponent implements OnInit {
     this.route.params.subscribe(p =>{
       this.key = p.key;
       this.UrunGetir();
+
+      var user: any = JSON.parse(localStorage.getItem("user"));
+      this.admin = user.uid;
     });
+  }
+
+  AdminKontrol() {
+    if (this.admin != "SKqXUccqDeQLxJQqn5T4L9EdEm32") {
+      this.router.navigate(['/']);
+    }
   }
 
   UrunGetir(){

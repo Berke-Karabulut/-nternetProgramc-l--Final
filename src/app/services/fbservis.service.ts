@@ -62,33 +62,7 @@ export class FbservisService {
   UyeEkle(uye: Uye) {
     return this.uyeRef.push(uye);
   }
-  /* Storage Servisleri Başlangıç */
-
-  UrunYukleStorage(urun: Urun) {
-    var tarih = new Date();
-    const urunYol = this.basePath + "/" + urun.file.name;
-    const storageRef = this.storage.ref(urunYol);
-    const yukleTask = this.storage.upload(urunYol, urun.file);
-    yukleTask.snapshotChanges().pipe(
-      finalize(() => {
-        storageRef.getDownloadURL().subscribe(downloadURL => {
-          urun.urunphotoUrl = downloadURL;    
-          urun.kayTarih = tarih.getTime().toString();
-          urun.urunAdi = urun.file.name;
-       
-          this.UrunVerileriKaydet(urun);
-        });
-      })
-    ).subscribe();
-    return yukleTask.percentageChanges();
-  }
-
-  UrunVerileriKaydet(urun: Urun){
-    this.db.list(this.basePath).push(urun);
-  }
-  urunFotoListele(){
-    return this.db.list(this.basePath);
-  }
+ 
 
   /* Ürün Servisleri Başlangıç */
   

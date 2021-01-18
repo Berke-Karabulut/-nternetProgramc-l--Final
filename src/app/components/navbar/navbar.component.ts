@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  
+  admin: string;
+  adminsonuc: boolean;
 
   constructor(
     public fbservis: FbservisService,
@@ -15,8 +18,10 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+   
   }
+
+
   OturumKapat(){
     this.fbservis.OturumKapat().then(d=>{
       localStorage.removeItem("user")

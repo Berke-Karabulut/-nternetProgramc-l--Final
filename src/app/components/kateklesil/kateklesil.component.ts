@@ -17,6 +17,8 @@ export class KateklesilComponent implements OnInit {
   sonuc: Sonuc = new Sonuc();
   katSonuc: Sonuc = new Sonuc();
   silme: boolean = false;
+  admin: string;
+  adminsonuc: boolean;
 
   constructor(
     public fbServis: FbservisService,
@@ -25,6 +27,15 @@ export class KateklesilComponent implements OnInit {
 
   ngOnInit() {
    this.KategoriListele();
+   var user: any = JSON.parse(localStorage.getItem("user"));
+    this.admin = user.uid;
+    this.AdminKontrol();
+  }
+
+  AdminKontrol() {
+    if (this.admin != "SKqXUccqDeQLxJQqn5T4L9EdEm32") {
+      this.router.navigate(['/']);
+    }
   }
   
   KategoriListele(){
